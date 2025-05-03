@@ -2,15 +2,16 @@
 state_management.py
 ----------------
 Author: Nida Anis
-Date: 10/02/2025
+Date: 03/05/2025
 ----------------
 Description:
 -> Handles event storage and removal
 """
 
 import streamlit as st
-from datetime import datetime
 import os
+
+from datetime import datetime
 
 def initialise_session_state():
     """Make sure that session state variables exist."""

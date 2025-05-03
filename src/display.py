@@ -9,13 +9,14 @@ Description:
 """
 
 import streamlit as st
-from datetime import datetime
-from streamlit_autorefresh import st_autorefresh
-from src.helpers import format_remainingm_time
-from src.state_management import remove_past_events, initialise_session_state
-from src.ui_themes import get_active_theme
 import os
 import base64
+
+from datetime import datetime
+from streamlit_autorefresh import st_autorefresh
+from src.helpers import format_remaining_time
+from src.state_management import remove_past_events, initialise_session_state
+from src.ui_themes import get_active_theme
 
 def display_clock():
     """Displays a large digital clock that highlights active events."""
@@ -199,4 +200,7 @@ def adjust_brightness(hex_colour, amount):
     # Adjust brightness
     r = max(0, min(255, r + amount))
     g = max(0, min(255, g + amount))
-    b = max
+    b = max(0, min(255, b + amount))
+
+    # Convert back into hex
+    return f"#{int(r):02x}{int(g):02x}{int(b):02x}"
