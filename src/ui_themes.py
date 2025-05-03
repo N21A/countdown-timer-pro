@@ -147,3 +147,45 @@ def apply_theme():
     
     # Return these colours for use in components
     return theme
+
+def set_theme(theme_id):
+    """Set the active theme."""
+    if theme_id in st.session_state["themes"] or theme_id in st.session_state["custom_themes"]:
+        st.session_state["active_theme"] = theme_id
+        return True
+    return False
+
+def save_custom_theme(theme_data, theme_name):
+    """Save a custom theme."""
+    import re
+    import uuid
+
+    theme_id = f"custom_{re.sub(r'[^a-z0-9]', '_', theme_name.lower())}_{str(uuid.uuid4())[:8]}"
+
+    # Create the theme
+    new_theme = {
+        "name": theme_name,
+        "description": f"Custom theme created on {st.session_state.get('date', 'date')}",
+        **theme_data
+    }
+
+    # Save to custom themes
+    st.session_state["custom_themes"][theme_id] = new_theme
+
+    return theme_id
+
+def export_themes():
+    """Export all themes to .JSON."""
+    themes_data = {
+        "default_themes": st.session_state["themes"],
+        "custom_themes": st.session_state["custom_themes"]
+    }
+
+    return json.dumps(themes_data, indent=2)
+
+def import_themes(imported_data):
+    """Import themes from .JSON data."""
+    if "custom_themes" in imported_data:
+        st.session_state["custom_themes"].update(imported_data["custom_themes"])
+        return True
+    return False

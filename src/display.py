@@ -27,7 +27,6 @@ def display_clock():
     active_event_colour = theme["active_event_colour"]
     next_event_colour = theme["next_event_colour"]
 
-
     clock_placeholder = st.empty()
     event_placeholder = st.empty()
     next_event_placeholder = st.empty()
