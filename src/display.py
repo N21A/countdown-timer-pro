@@ -14,6 +14,7 @@ import base64
 
 from datetime import datetime
 from streamlit_autorefresh import st_autorefresh
+
 from src.helpers import format_remaining_time
 from src.state_management import remove_past_events, initialise_session_state
 from src.ui_themes import get_active_theme
